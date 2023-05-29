@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 from dataset import GenericDataset
 
-## check bitcoin prices
+## visualuze the heatmaps
 def visualize_heatmaps(path_to_heatmaps_folder, path_to_video = None):
     path_to_heatmaps_folder = Path(path_to_heatmaps_folder)
     images_paths = sorted(path_to_heatmaps_folder.glob('*.npy'))

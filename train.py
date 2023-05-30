@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from datetime import datetime
 from pathlib import Path
-
+import os
 import torch
 from torch.utils.data import DataLoader, random_split
 from torchvision.utils import save_image
@@ -239,14 +239,24 @@ if __name__ == '__main__':
     optimizer = torch.optim.SGD(model.parameters(), lr=opt.lr, momentum=opt.momentum, weight_decay=opt.weight_decay)
 
 
-    if opt.type == 'auto':
+  dataset_dir = "/content/TrackNet/TrackNet/TrackNet/example_datasets/video_dataset"
+
+# Check if the 'images' or 'videos' folder exists in the dataset directory
+if opt.type == 'auto':
+    images_dir = os.path.join(dataset_dir, 'images')
+    videos_dir = os.path.join(dataset_dir, 'videos')
+    if os.path.exists(images_dir):
         full_dataset = dataset.GenericDataset.from_dir(opt)
-    elif opt.type == 'image':
-        full_dataset = dataset.ImagesDataset(opt)
-    elif opt.type == 'video':
-        full_dataset = dataset.VideosDataset(opt)
+    elif os.path.exists(videos_dir):
+        full_dataset = dataset.GenericDataset.from_dir(opt)
     else:
-        raise Exception("type argument must be one of {'auto', 'image', 'video'}")
+        raise Exception(f"No '{images_dir}' or '{videos_dir}' folder found in the dataset directory.")
+elif opt.type == 'image':
+    full_dataset = dataset.ImagesDataset(opt)
+elif opt.type == 'video':
+    full_dataset = dataset.VideosDataset(opt)
+else:
+    raise Exception("type argument must be one of {'auto', 'image', 'video'}")
 
     train_size = int(opt.train_size * len(full_dataset))
     val_size = len(full_dataset) - train_size

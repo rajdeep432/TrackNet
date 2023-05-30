@@ -240,7 +240,7 @@ if __name__ == '__main__':
 
 
 # Specify the dataset directory path
-dataset_dir = "/content/TrackNet/TrackNet/TrackNet/example_datasets/video_dataset"
+dataset_dir = "/content/TrackNet/TrackNet/TrackNet/example_datasets/video_dataset/videos"
 
 # Check if the 'images' or 'videos' folder exists in the dataset directory
 if opt.type == 'auto':

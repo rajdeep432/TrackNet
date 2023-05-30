@@ -42,8 +42,9 @@ if __name__ == '__main__':
     opt.dropout = 0
     device = torch.device(opt.device)
     model = TrackNet(opt).to(device)
-    model.load_state_dict(torch.load(opt.weights, map_location=device)['model_state_dict'])
+    model.load(opt.weights, device=opt.device)
     model.eval()
+
 
     cap = cv2.VideoCapture(opt.video)
     videoEndReached = False

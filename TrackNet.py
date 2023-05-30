@@ -86,7 +86,7 @@ class TrackNet(nn.Module):
 
 
     def load(self, path, device='cpu'):
-        self.load_state_dict(torch.load(path, map_location=device)['model_state_dict'])
+        self.load_state_dict(torch.load(path)['model_state_dict'])
 
 
 if __name__ == '__main__':

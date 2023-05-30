@@ -77,16 +77,18 @@ class TrackNet(nn.Module):
 
         return x
 
+def save(self, path, whole_model=False):
+    if whole_model:
+        torch.save(self, path)
+    else:
+        torch.save(self.state_dict(), path)
 
-    def save(self, path, whole_model=False):
-        if whole_model:
-            torch.save(self, path)
-        else:
-            torch.save(self.state_dict(), path)
 
-
-    def load(self, path, device='cpu'):
-        self.load_state_dict(torch.load(path)['model_state_dict'])
+def load(self, path, device='cpu'):
+    if device == 'cuda':
+        self.load_state_dict(torch.load(path, map_location='cuda')['model_state_dict'])
+    else:
+        self.load_state_dict(torch.load(path, map_location=device)['model_state_dict'])
 
 
 if __name__ == '__main__':

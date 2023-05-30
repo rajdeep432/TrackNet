@@ -239,7 +239,8 @@ if __name__ == '__main__':
     optimizer = torch.optim.SGD(model.parameters(), lr=opt.lr, momentum=opt.momentum, weight_decay=opt.weight_decay)
 
 
-  dataset_dir = "/content/TrackNet/TrackNet/TrackNet/example_datasets/video_dataset"
+# Specify the dataset directory path
+dataset_dir = "/content/TrackNet/TrackNet/TrackNet/example_datasets/video_dataset"
 
 # Check if the 'images' or 'videos' folder exists in the dataset directory
 if opt.type == 'auto':

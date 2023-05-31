@@ -42,7 +42,8 @@ if __name__ == '__main__':
     opt.dropout = 0
     device = torch.device(opt.device)
     model = TrackNet(opt).to(device)
-    model.load(opt.weights, device=opt.device)
+    model = TrackNet()
+    model.load_state_dict(opt.weights, device=opt.device)
     model.eval()
 
 

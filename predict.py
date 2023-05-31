@@ -41,10 +41,12 @@ if __name__ == '__main__':
     opt = parse_opt()
     opt.dropout = 0
     device = torch.device(opt.device)
+    model.load('example_datasets/video_dataset/csvs')
     model = TrackNet(opt).to(device)
     #model = TrackNet()
     model.load_state_dict(opt.weights, device=opt.device)
     model.eval()
+    
 
 
     cap = cv2.VideoCapture(opt.video)
